@@ -1,0 +1,15 @@
+mat-toolbar {
+  background-color:black;
+  color: white;
+  z-index: 2;
+  position: relative;
+}
+
+mat-sidenav {
+  width: 200px;
+  color: black;
+}
+
+mat-nav-list a{
+  color: white;
+}
