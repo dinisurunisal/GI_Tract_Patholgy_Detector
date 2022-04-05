@@ -1,7 +1,7 @@
-import { HttpClient, HttpEventType } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { Observable} from 'rxjs';
+import { FileUploadService } from '../services/file-upload.service';
 
 @Component({
   selector: 'app-predictor',
@@ -10,52 +10,51 @@ import { finalize } from 'rxjs/operators';
 })
 export class PredictorComponent implements OnInit {
 
-  @Input() requiredFileType:string;
+  selectedImages: FileList;
+  uploadProgress = [];
+  message = '';
+  fileDetails: Observable<any>;
 
-  fileName = '';
-  uploadProgress :number;
-  uploadSub: Subscription;
-
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private uploadService: FileUploadService
+  ) { }
 
   ngOnInit(): void {
   }
 
-  onFileSelected(event) {
-    const file:File = event.target.files[0];
-    console.log ('Name: ' + file.name + "\n" +
-        'Type: ' + file.type + "\n" +
-        'Size: ' + Math.round(file.size / 1024) + " KB");
+  onFileSelect(event): void {
+    this.uploadProgress = [];
+    this.selectedImages = event.target.files;
+  }
 
-    if (file) {
-        this.fileName = file.name;
-        const formData = new FormData();
-        formData.append("images", file);
-
-        const upload$ = this.http.post("/upload", formData, {
-            reportProgress: true,
-            observe: 'events'
-        })
-        .pipe(
-            finalize(() => this.reset())
-        );
-
-        this.uploadSub = upload$.subscribe(event => {
-          if (event.type == HttpEventType.UploadProgress) {
-            this.uploadProgress = Math.round(100 * (event.loaded / event.total));
-          }
-        })
+  uploadFiles() {
+    this.message = '';
+    for (let i = 0; i < this.selectedImages.length; i++) {
+      this.upload(i, this.selectedImages[i]);
     }
   }
 
-  cancelUpload() {
-    this.uploadSub.unsubscribe();
-    this.reset();
-  }
+  upload(idx, file) {
+    this.uploadProgress[idx] = { value: 0, fileName: file.name };
 
-  reset() {
-    this.uploadProgress = null;
-    this.uploadSub = null;
+    console.log ('Name: ' + file.name + "\n" +
+    'Type: ' + file.type + "\n" +
+    'Size: ' + Math.round(file.size / 1024) + " KB");
+
+    this.uploadService.upload(file).subscribe(
+      event => {
+        if (event.type === HttpEventType.UploadProgress) {
+          this.uploadProgress[idx].value = Math.round(100 * event.loaded / event.total);
+        } else if (event instanceof HttpResponse) {
+          this.message = event.body.message;
+          this.fileDetails = this.uploadService.getUploadedFiles();
+        }
+      },
+      err => {
+        this.uploadProgress[idx].value = 0;
+        this.message = 'Could not upload the file:' + file.name;
+      });
   }
 
 }
