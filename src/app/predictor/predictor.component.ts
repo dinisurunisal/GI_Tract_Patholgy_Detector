@@ -10,7 +10,9 @@ import { FileUploadService } from '../services/file-upload.service';
 })
 export class PredictorComponent implements OnInit {
 
+  imageSrc: string;
   selectedImages: FileList;
+  uploadedImages = Array<string>();
   uploadProgress = [];
   message = '';
   fileDetails: Observable<any>;
@@ -26,12 +28,20 @@ export class PredictorComponent implements OnInit {
   onFileSelect(event): void {
     this.uploadProgress = [];
     this.selectedImages = event.target.files;
+    this.uploadedImages = [];
   }
 
   uploadFiles() {
     this.message = '';
     for (let i = 0; i < this.selectedImages.length; i++) {
       this.upload(i, this.selectedImages[i]);
+
+      const reader = new FileReader();
+      reader.readAsDataURL(this.selectedImages[i]);
+
+      reader.onload = () => {
+        this.uploadedImages.push(reader.result as string)
+      }
     }
   }
 
@@ -55,6 +65,10 @@ export class PredictorComponent implements OnInit {
         this.uploadProgress[idx].value = 0;
         this.message = 'Could not upload the file:' + file.name;
       });
+  }
+
+  getImageDetails(id) {
+    return this.selectedImages[id]
   }
 
 }
