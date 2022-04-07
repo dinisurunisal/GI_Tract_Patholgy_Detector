@@ -12,10 +12,11 @@ export class PredictorComponent implements OnInit {
 
   imageSrc: string;
   selectedImages: FileList;
-  uploadedImages = Array<string>();
+  uploadedImages = Array<any>();
   uploadProgress = [];
   message = '';
   fileDetails: Observable<any>;
+  imageisloaded = false;
 
   constructor(
     private http: HttpClient,
@@ -27,6 +28,7 @@ export class PredictorComponent implements OnInit {
 
   onFileSelect(event): void {
     this.uploadProgress = [];
+    this.selectedImages = null;
     this.selectedImages = event.target.files;
     this.uploadedImages = [];
   }
@@ -40,7 +42,13 @@ export class PredictorComponent implements OnInit {
       reader.readAsDataURL(this.selectedImages[i]);
 
       reader.onload = () => {
-        this.uploadedImages.push(reader.result as string)
+        const dataToBeSubmitted = {
+          name: this.selectedImages[i].name,
+          type: this.selectedImages[i].type,
+          size: Math.round(this.selectedImages[i].size / 1024) + " KB",
+          src: reader.result as string
+        }
+        this.uploadedImages.push(dataToBeSubmitted)
       }
     }
   }
@@ -65,10 +73,12 @@ export class PredictorComponent implements OnInit {
         this.uploadProgress[idx].value = 0;
         this.message = 'Could not upload the file:' + file.name;
       });
+
+    this.imageisloaded = true;
   }
 
-  getImageDetails(id) {
-    return this.selectedImages[id]
+  onPredictClick() {
+
   }
 
 }

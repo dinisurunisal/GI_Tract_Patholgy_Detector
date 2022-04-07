@@ -25,6 +25,10 @@
 
       <div class="alert alert-light" role="alert">{{ message }}</div>
 
+      <button class="btn btn-success" (click)="onPredictClick()">
+        Predict
+      </button>
+
     </div>
   </mat-card>
 
@@ -39,19 +43,27 @@
     </div>
   </mat-card> -->
 
-  <mat-card class="card">
+  <mat-card class="card" *ngIf="imageisloaded">
     <div class="grid-container">
       <div class="card-header">List of Images</div>
-      <div class="list-group list-group-flush" *ngFor="let image of uploadedImages">
+      <div fxLayout>
+        <div *ngFor="let image of uploadedImages">
 
-        <mat-card class="example-card">
-          <mat-card-header>
-            <mat-card-title>{{getImageDetails(image)}}</mat-card-title>
-          </mat-card-header>
-          <img mat-card-image [src]="image" alt="Photo of a Shiba Inu">
-        </mat-card>
+          <mat-card class="example-card">
+            <mat-card-header>
+              <mat-card-title class="break"></mat-card-title>
+            </mat-card-header>
+            <img mat-card-image [src]="image.src" alt="Image Shadow">
+            <mat-card-content>
+              <p class="break">Name : {{image.name}}</p>
+              <p class="break">Type : {{image.type}}</p>
+              <p class="break">Size : {{image.size}}</p>
+            </mat-card-content>
+          </mat-card>
 
+        </div>
       </div>
+
     </div>
   </mat-card>
 
