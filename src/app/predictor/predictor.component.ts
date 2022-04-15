@@ -1,5 +1,6 @@
 import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatHorizontalStepper } from '@angular/material/stepper';
 import { Observable} from 'rxjs';
 import { FileUploadService } from '../services/file-upload.service';
 
@@ -10,13 +11,15 @@ import { FileUploadService } from '../services/file-upload.service';
 })
 export class PredictorComponent implements OnInit {
 
+  @ViewChild('stepper') stepper: MatHorizontalStepper;
+
   imageSrc: string;
   selectedImages: FileList;
+  enableUpload = false;
   uploadedImages = Array<any>();
   uploadProgress = [];
-  message = '';
+  fileUploadList = [];
   fileDetails: Observable<any>;
-  imageisloaded = false;
 
   constructor(
     private http: HttpClient,
@@ -28,13 +31,15 @@ export class PredictorComponent implements OnInit {
 
   onFileSelect(event): void {
     this.uploadProgress = [];
+    this.uploadedImages = [];
+    this.fileUploadList = [];
     this.selectedImages = null;
     this.selectedImages = event.target.files;
-    this.uploadedImages = [];
+    this.enableUpload = true;
   }
 
   uploadFiles() {
-    this.message = '';
+
     for (let i = 0; i < this.selectedImages.length; i++) {
       this.upload(i, this.selectedImages[i]);
 
@@ -50,11 +55,14 @@ export class PredictorComponent implements OnInit {
         }
         this.uploadedImages.push(dataToBeSubmitted)
       }
+
+      this.enableUpload = false;
     }
   }
 
   upload(idx, file) {
     this.uploadProgress[idx] = { value: 0, fileName: file.name };
+    this.fileUploadList[idx] = { fileName: file.name, message: '', validity: false };
 
     console.log ('Name: ' + file.name + "\n" +
     'Type: ' + file.type + "\n" +
@@ -65,20 +73,32 @@ export class PredictorComponent implements OnInit {
         if (event.type === HttpEventType.UploadProgress) {
           this.uploadProgress[idx].value = Math.round(100 * event.loaded / event.total);
         } else if (event instanceof HttpResponse) {
-          this.message = event.body.message;
-          this.fileDetails = this.uploadService.getUploadedFiles();
+          this.fileUploadList[idx].message = event.body.message;
+          this.fileUploadList[idx].validity = event.body.valid;
+          // this.fileDetails = this.uploadService.getUploadedFiles();
         }
-      },
-      err => {
-        this.uploadProgress[idx].value = 0;
-        this.message = 'Could not upload the file:' + file.name;
-      });
+      }
+    );
+  }
 
-    this.imageisloaded = true;
+  onFirstStepDone() {
+    if (this.fileUploadList.length !== 0){
+      this.stepper.next();
+    }
   }
 
   onPredictClick() {
+    for (let i = 0; i < this.selectedImages.length; i++) {
 
+      this.uploadService.predict(this.selectedImages[i]).subscribe(
+        event => {
+          if (event instanceof HttpResponse) {
+            console.log(event.body.prediction)
+          } else if (event instanceof HttpResponse) {
+          }
+        }
+      );
+    }
   }
 
 }

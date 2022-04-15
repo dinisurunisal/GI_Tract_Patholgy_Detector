@@ -16,6 +16,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { PredictorComponent } from './predictor/predictor.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatIconModule,
     MatListModule,
     MatCardModule,
+    MatStepperModule,
+    MatButtonModule,
     MatProgressBarModule,
     FlexLayoutModule
   ],

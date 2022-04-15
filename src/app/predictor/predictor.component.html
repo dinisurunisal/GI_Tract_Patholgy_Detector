@@ -2,7 +2,86 @@
   <div>
     <h1>Identify Pathologies</h1>
   </div>
-  <mat-card class="card">
+
+  <mat-horizontal-stepper linear #stepper>
+    <mat-step state="phone">
+      <ng-template matStepLabel>Upload Images</ng-template>
+
+      <div class="grid-container">
+
+        <div class="dotted-box">
+          <div>
+            <label>
+              <input type="file" class="file-input" multiple (change)="onFileSelect($event)" accept="image/png, image/jpeg" style="margin-top: 10px; margin-bottom: 10px;">
+            </label>
+          </div>
+
+          <div style="text-align: center;">
+            <button mat-raised-button color="warn" [disabled]="!enableUpload" (click)="uploadFiles()">
+              Upload
+            </button>
+          </div>
+
+        </div>
+
+        <div class="files-list">
+          <div *ngFor="let progressInfo of uploadProgress" class="progress" class="single-file">
+            <img src="assets/folder.png" width="45px" alt="file" style="margin-right: 0.5rem;">
+            <div class="info">
+              <span>{{ progressInfo.fileName }}</span>
+              <mat-progress-bar class="progress-bar" mode="determinate" [value]="progressInfo.value">
+              </mat-progress-bar>
+              {{ progressInfo.value }}%
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <button mat-flat-button color="primary" (click)="onFirstStepDone()">Next</button>
+        </div>
+      </div>
+
+    </mat-step>
+    <mat-step label="Preview">
+
+      <div class="grid-container">
+        <div fxLayout>
+          <div *ngFor="let image of uploadedImages">
+
+            <mat-card class="example-card">
+              <mat-card-header>
+                <mat-card-title class="break"></mat-card-title>
+              </mat-card-header>
+              <img mat-card-image [src]="image.src" alt="Image Shadow">
+              <mat-card-content>
+                <p class="break">Name : {{image.name}}</p>
+                <p class="break">Type : {{image.type}}</p>
+                <p class="break">Size : {{image.size}}</p>
+              </mat-card-content>
+            </mat-card>
+
+          </div>
+        </div>
+
+        <div>
+          <button mat-flat-button color="primary" matStepperPrevious>Back</button>
+          <button mat-flat-button color="primary" matStepperNext (click)="onPredictClick()">Examine</button>
+        </div>
+
+      </div>
+
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Examined Result</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-flat-button color="primary" matStepperPrevious>Back</button>
+        <button mat-flat-button color="primary" (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+
+  <!-- <mat-card class="card">
     <div class="grid-container">
       <div>
         <h3>Upload Images here</h3>
@@ -30,7 +109,7 @@
       </button>
 
     </div>
-  </mat-card>
+  </mat-card> -->
 
   <!-- <mat-card class="card">
     <div class="grid-container">
@@ -43,7 +122,7 @@
     </div>
   </mat-card> -->
 
-  <mat-card class="card" *ngIf="imageisloaded">
+  <!-- <mat-card class="card" *ngIf="imageisloaded">
     <div class="grid-container">
       <div class="card-header">List of Images</div>
       <div fxLayout>
@@ -65,6 +144,6 @@
       </div>
 
     </div>
-  </mat-card>
+  </mat-card> -->
 
 </section>

@@ -5,3 +5,43 @@
 .break {
   word-break: break-all;
 }
+
+.mat-stepper-horizontal {
+  margin-top: 8px;
+}
+
+::ng-deep .mat-horizontal-stepper-header{
+  pointer-events: none !important;
+}
+
+.dotted-box {
+  border-style: dotted;
+  border-radius: 5px;
+  border-color: gray;
+  padding-right: 2rem;
+  padding-left: 2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
+}
+
+.files-list {
+  margin-top: 1.5rem;
+
+  .single-file {
+    border-style: dotted;
+    border-radius: 5px;
+    border-color: gray;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .info {
+    width: 100%
+  }
+}
