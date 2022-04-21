@@ -1,5 +1,13 @@
-.example-card {
-  max-width: 200px;
+.preview-mat-card {
+
+  img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    max-width: 300px;
+  }
 }
 
 .break {
@@ -44,4 +52,13 @@
   .info {
     width: 100%
   }
+}
+
+.report-header-image {
+  background-image: url('F:/FYP/gi-tract-pathology-detection/src/assets/reportImage.png');
+  background-size: cover;
+}
+
+.prediction-rows {
+  margin-top: 10px;
 }

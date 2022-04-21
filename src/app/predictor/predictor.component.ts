@@ -4,6 +4,16 @@ import { MatHorizontalStepper } from '@angular/material/stepper';
 import { Observable} from 'rxjs';
 import { FileUploadService } from '../services/file-upload.service';
 
+interface Predictions {
+  imageName: String;
+  class1: String;
+  class2: String;
+  class3: String;
+  prob1: String;
+  prob2: String;
+  prob3: String;
+}
+
 @Component({
   selector: 'app-predictor',
   templateUrl: './predictor.component.html',
@@ -20,6 +30,8 @@ export class PredictorComponent implements OnInit {
   uploadProgress = [];
   fileUploadList = [];
   fileDetails: Observable<any>;
+  dataDisplay: Predictions;
+  showSpinner = true;
 
   constructor(
     private http: HttpClient,
@@ -69,12 +81,12 @@ export class PredictorComponent implements OnInit {
     'Size: ' + Math.round(file.size / 1024) + " KB");
 
     this.uploadService.upload(file).subscribe(
-      event => {
-        if (event.type === HttpEventType.UploadProgress) {
-          this.uploadProgress[idx].value = Math.round(100 * event.loaded / event.total);
-        } else if (event instanceof HttpResponse) {
-          this.fileUploadList[idx].message = event.body.message;
-          this.fileUploadList[idx].validity = event.body.valid;
+      response => {
+        if (response.type === HttpEventType.UploadProgress) {
+          this.uploadProgress[idx].value = Math.round(100 * response.loaded / response.total);
+        } else if (response instanceof HttpResponse) {
+          this.fileUploadList[idx].message = response.body.message;
+          this.fileUploadList[idx].validity = response.body.valid;
           // this.fileDetails = this.uploadService.getUploadedFiles();
         }
       }
@@ -91,14 +103,19 @@ export class PredictorComponent implements OnInit {
     for (let i = 0; i < this.selectedImages.length; i++) {
 
       this.uploadService.predict(this.selectedImages[i]).subscribe(
-        event => {
-          if (event instanceof HttpResponse) {
-            console.log(event.body.prediction)
-          } else if (event instanceof HttpResponse) {
+        response => {
+          if (response instanceof HttpResponse) {
+            this.dataDisplay = response.body.prediction;
+            console.log(response.body.prediction)
+            this.showSpinner = false;
           }
         }
       );
     }
+  }
+
+  getFileImage(name) {
+    return this.uploadedImages.find(x => x.name === name)?.src;
   }
 
 }
