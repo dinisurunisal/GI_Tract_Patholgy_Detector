@@ -12,7 +12,8 @@
         <div class="dotted-box">
           <div>
             <label>
-              <input type="file" class="file-input" multiple (change)="onFileSelect($event)" accept="image/png, image/jpeg" style="margin-top: 10px; margin-bottom: 10px;">
+              <input type="file" class="file-input" multiple (change)="onFileSelect($event)" accept="image/png, image/jpeg"
+              style="margin-top: 10px; margin-bottom: 10px; width: 100%;" #takeInput>
             </label>
           </div>
 
@@ -67,42 +68,6 @@
           </div>
         </div>
 
-        <!-- <div fxLayout="row" *ngFor="let image of uploadedImages">
-          <mat-card fxLayout="row" fxFlex="50%" class="center space-top">
-            <mat-card-content fxLayout.gt-sm="row">
-              <div fxLayout.gt-sm="column" fxFlex.gt-sm="40%">
-                <img [src]="image.src" alt="Image Shadow">
-              </div>
-              <div fxLayout.gt-sm="column" fxFlex.gt-sm="50%" class="gutter">
-                <p class="break">Name : {{image.name}}</p>
-                <p class="break">Type : {{image.type}}</p>
-                <p class="break">Size : {{image.size}}</p>
-              </div>
-            </mat-card-content>
-          </mat-card>
-        </div> -->
-
-        <!-- <div>
-          <mat-grid-list cols="2">
-            <mat-grid-tile *ngFor="let image of uploadedImages" style="margin-top: -1000px;">
-              <mat-card class="preview-mat-card">
-
-                <img mat-card-image [src]="image.src" alt="Image Shadow" style="float: left;">
-
-                <div style="width: 50%; float: left;">
-                  <mat-card-content>
-                    <p class="break">Name : {{image.name}}</p>
-                    <p class="break">Type : {{image.type}}</p>
-                    <p class="break">Size : {{image.size}}</p>
-                  </mat-card-content>
-                </div>
-              </mat-card>
-            </mat-grid-tile>
-
-          </mat-grid-list>
-        </div> -->
-
-
         <div style="margin-top: 20px;">
           <button mat-flat-button color="primary" matStepperPrevious style="margin-right: 20px;">Back</button>
           <button mat-flat-button color="warn" matStepperNext (click)="onPredictClick()">Examine</button>
@@ -125,56 +90,59 @@
             </mat-card-header>
             <mat-card-content>
 
-              <mat-card class="grid-container">
-                <mat-card-title-group>
-                  <mat-card-title><h3><b>File Name:</b> {{dataDisplay.imageName}}</h3></mat-card-title>
-                  <img mat-card-sm-image [src]="getFileImage(dataDisplay.imageName)" >
-                </mat-card-title-group>
-                <mat-card-content style="margin-top: 20px;">
-                  <div class="prediction-rows">
-                    <div fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutAlign="start start" fxLayoutGap="1rem">
-                      <div fxFlex="70">
-                        {{dataDisplay.class1}}
+              <div *ngFor="let item of dataDisplay; let i = index">
+                <mat-card class="grid-container">
+                  <mat-card-title-group>
+                    <mat-card-title><h3><b>File Name:</b> {{item.imageName}}</h3></mat-card-title>
+                    <img mat-card-sm-image [src]="getFileImage(item.imageName)" >
+                  </mat-card-title-group>
+                  <mat-card-content style="margin-top: 20px;">
+                    <div class="prediction-rows">
+                      <div fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutAlign="start start" fxLayoutGap="1rem">
+                        <div fxFlex="70">
+                          {{item.class1}}
+                        </div>
+                        <div fxFlex="30" fxLayoutAlign="end end">
+                          {{item.prob1}}%
+                        </div>
                       </div>
-                      <div fxFlex="30" fxLayoutAlign="end end">
-                        {{dataDisplay.prob1}}%
-                      </div>
+                      <mat-progress-bar class="progress-bar" mode="determinate" [value]="item.prob1">
+                      </mat-progress-bar>
                     </div>
-                    <mat-progress-bar class="progress-bar" mode="determinate" [value]="dataDisplay.prob1">
-                    </mat-progress-bar>
-                  </div>
-                  <div class="prediction-rows">
-                    <div fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutAlign="start start" fxLayoutGap="1rem">
-                      <div fxFlex="70">
-                        {{dataDisplay.class2}}
+                    <div class="prediction-rows">
+                      <div fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutAlign="start start" fxLayoutGap="1rem">
+                        <div fxFlex="70">
+                          {{item.class2}}
+                        </div>
+                        <div fxFlex="30" fxLayoutAlign="end end">
+                          {{item.prob2}}%
+                        </div>
                       </div>
-                      <div fxFlex="30" fxLayoutAlign="end end">
-                        {{dataDisplay.prob2}}%
-                      </div>
+                      <mat-progress-bar class="progress-bar" mode="determinate" [value]="item.prob2">
+                      </mat-progress-bar>
                     </div>
-                    <mat-progress-bar class="progress-bar" mode="determinate" [value]="dataDisplay.prob2">
-                    </mat-progress-bar>
-                  </div>
-                  <div class="prediction-rows">
-                    <div fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutAlign="start start" fxLayoutGap="1rem">
-                      <div fxFlex="70">
-                        {{dataDisplay.class3}}
+                    <div class="prediction-rows">
+                      <div fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutAlign="start start" fxLayoutGap="1rem">
+                        <div fxFlex="70">
+                          {{item.class3}}
+                        </div>
+                        <div fxFlex="30" fxLayoutAlign="end end">
+                          {{item.prob3}}%
+                        </div>
                       </div>
-                      <div fxFlex="30" fxLayoutAlign="end end">
-                        {{dataDisplay.prob3}}%
-                      </div>
+                      <mat-progress-bar class="progress-bar" mode="determinate" [value]="item.prob3">
+                      </mat-progress-bar>
                     </div>
-                    <mat-progress-bar class="progress-bar" mode="determinate" [value]="dataDisplay.prob3">
-                    </mat-progress-bar>
-                  </div>
-                </mat-card-content>
-              </mat-card>
+                  </mat-card-content>
+                </mat-card>
+              </div>
+
             </mat-card-content>
           </mat-card>
         </div>
         <div style="margin-top: 20px;">
           <button mat-flat-button color="primary" matStepperPrevious style="margin-right: 20px;">Back</button>
-          <button mat-flat-button color="primary" (click)="stepper.reset()">Reset</button>
+          <button mat-flat-button color="primary" (click)="onResetClick()">Reset</button>
         </div>
       </div>
 

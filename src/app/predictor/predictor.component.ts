@@ -1,5 +1,5 @@
 import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatHorizontalStepper } from '@angular/material/stepper';
 import { Observable} from 'rxjs';
 import { FileUploadService } from '../services/file-upload.service';
@@ -22,6 +22,7 @@ interface Predictions {
 export class PredictorComponent implements OnInit {
 
   @ViewChild('stepper') stepper: MatHorizontalStepper;
+  @ViewChild('takeInput', {static: false}) takeInput: ElementRef;
 
   imageSrc: string;
   selectedImages: FileList;
@@ -30,7 +31,7 @@ export class PredictorComponent implements OnInit {
   uploadProgress = [];
   fileUploadList = [];
   fileDetails: Observable<any>;
-  dataDisplay: Predictions;
+  dataDisplay = new Array<Predictions>();
   showSpinner = true;
 
   constructor(
@@ -45,6 +46,7 @@ export class PredictorComponent implements OnInit {
     this.uploadProgress = [];
     this.uploadedImages = [];
     this.fileUploadList = [];
+    this.dataDisplay = [];
     this.selectedImages = null;
     this.selectedImages = event.target.files;
     this.enableUpload = true;
@@ -99,13 +101,24 @@ export class PredictorComponent implements OnInit {
     }
   }
 
+  onResetClick() {
+    this.uploadProgress = [];
+    this.uploadedImages = [];
+    this.fileUploadList = [];
+    this.dataDisplay = [];
+    this.selectedImages = null;
+    this.takeInput.nativeElement.value = "";
+    this.stepper.reset();
+    this.stepper.selectedIndex = 0;
+  }
+
   onPredictClick() {
     for (let i = 0; i < this.selectedImages.length; i++) {
 
       this.uploadService.predict(this.selectedImages[i]).subscribe(
         response => {
           if (response instanceof HttpResponse) {
-            this.dataDisplay = response.body.prediction;
+            this.dataDisplay.push(response.body.prediction);
             console.log(response.body.prediction)
             this.showSpinner = false;
           }
