@@ -46,10 +46,12 @@
     <mat-step label="Preview">
 
       <div class="grid-container">
-        <div id="block" fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutAlign="start start" fxLayoutGap="1rem">
-          <div *ngFor="let image of uploadedImages" fxFlex="50">
+        <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="flex-start" fxLayoutGap="1rem" style="width: 100%;">
 
-            <mat-card class="preview-mat-card" >
+          <ng-container *ngFor="let image of uploadedImages">
+
+            <mat-card class="preview-mat-card" fxFlex="0 1 calc(33.3% - 1rem)" fxFlex.lt-md="0 1 calc(50% - 32px)"
+            fxFlex.lt-sm="100%">
 
               <mat-card-content >
                 <div fxLayout="row" fxLayoutGap="10">
@@ -64,8 +66,8 @@
                 </div>
               </mat-card-content>
             </mat-card>
+          </ng-container>
 
-          </div>
         </div>
 
         <div style="margin-top: 20px;">
@@ -81,11 +83,12 @@
 
       <div class="grid-container">
         <mat-spinner color="primary" *ngIf="showSpinner"></mat-spinner>
-        <div *ngIf="!showSpinner">
+
+        <div *ngIf="!showSpinner" id="pdfReport" #pdfReport>
           <mat-card style="background-color: rgb(214, 224, 239)">
             <mat-card-header>
               <div mat-card-avatar class="report-header-image"></div>
-              <mat-card-title>General Report</mat-card-title>
+              <mat-card-title>ENDOSCOPY REPORT</mat-card-title>
               <mat-card-subtitle>Predicted Pathologies/ Abnormalities</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
@@ -140,6 +143,11 @@
             </mat-card-content>
           </mat-card>
         </div>
+
+        <button mat-fab color="accent" class="download-fab" (click)="openPDF()" matTooltip="Download PDF">
+          <mat-icon>vertical_align_bottom</mat-icon>
+        </button>
+
         <div style="margin-top: 20px;">
           <button mat-flat-button color="primary" matStepperPrevious style="margin-right: 20px;">Back</button>
           <button mat-flat-button color="primary" (click)="onResetClick()">Reset</button>

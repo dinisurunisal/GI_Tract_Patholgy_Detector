@@ -1,4 +1,6 @@
 .preview-mat-card {
+  margin-bottom: 1rem;
+  width: 100%;
 
   img {
     object-fit: cover;
@@ -61,4 +63,10 @@
 
 .prediction-rows {
   margin-top: 10px;
+}
+
+.download-fab {
+  position: fixed;
+  right: 3em;
+  bottom: 2em;
 }

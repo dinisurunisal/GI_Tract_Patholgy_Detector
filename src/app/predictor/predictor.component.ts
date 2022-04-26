@@ -3,6 +3,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatHorizontalStepper } from '@angular/material/stepper';
 import { Observable} from 'rxjs';
 import { FileUploadService } from '../services/file-upload.service';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 interface Predictions {
   imageName: String;
@@ -23,6 +25,7 @@ export class PredictorComponent implements OnInit {
 
   @ViewChild('stepper') stepper: MatHorizontalStepper;
   @ViewChild('takeInput', {static: false}) takeInput: ElementRef;
+  @ViewChild('pdfReport') pdfReport!: ElementRef;
 
   imageSrc: string;
   selectedImages: FileList;
@@ -113,6 +116,8 @@ export class PredictorComponent implements OnInit {
   }
 
   onPredictClick() {
+    this.dataDisplay = [];
+
     for (let i = 0; i < this.selectedImages.length; i++) {
 
       this.uploadService.predict(this.selectedImages[i]).subscribe(
@@ -129,6 +134,36 @@ export class PredictorComponent implements OnInit {
 
   getFileImage(name) {
     return this.uploadedImages.find(x => x.name === name)?.src;
+  }
+
+  public openPDF(): void {
+    let DATA: any = document.getElementById('pdfReport');
+
+    html2canvas(DATA).then((canvas) => {
+
+      var HTML_Width = canvas.width;
+      var HTML_Height = canvas.height;
+      var top_left_margin = 15;
+      var PDF_Width = HTML_Width+(top_left_margin*2);
+      var PDF_Height = (PDF_Width*1.5)+(top_left_margin*2);
+      var canvas_image_width = HTML_Width;
+      var canvas_image_height = HTML_Height;
+
+      var totalPDFPages = Math.ceil(HTML_Height/PDF_Height)-1;
+
+      canvas.getContext('2d');
+			console.log(canvas.height+"  "+canvas.width);
+
+			const FILEURI = canvas.toDataURL('image/png', 1.0);
+      let PDF = new jsPDF('p', 'pt',  [PDF_Width, PDF_Height]);
+      PDF.addImage(FILEURI, 'PNG', top_left_margin, top_left_margin,canvas_image_width,canvas_image_height);
+
+			for (let i = 1; i <= totalPDFPages; i++) {
+				PDF.addPage([PDF_Width, PDF_Height]);
+				PDF.addImage(FILEURI, 'PNG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
+			}
+      PDF.save('Gastro-Report.pdf');
+    });
   }
 
 }

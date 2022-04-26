@@ -21,6 +21,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatProgressSpinnerModule,
     MatGridListModule,
     MatChipsModule,
+    MatTooltipModule,
     FlexLayoutModule
   ],
   providers: [],
