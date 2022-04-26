@@ -1,0 +1,10 @@
+{
+  "category": [
+    {
+      "code": "polyps",
+      "name": "Polyps",
+      "type": "Pathological Finding",
+      "description": "polyp, in medicine, any growth projecting from the wall of a cavity lined with a mucous membrane. A polyp may have a broad base, in which case it is called sessile; or it may be a pedunculated polyp, i.e., one with a long, narrow neck. The surface of a polyp may be smooth, irregular, or multilobular."
+    }
+  ]
+}

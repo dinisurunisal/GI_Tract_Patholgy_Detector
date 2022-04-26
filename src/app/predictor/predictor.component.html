@@ -96,46 +96,53 @@
               <div *ngFor="let item of dataDisplay; let i = index">
                 <mat-card class="grid-container">
                   <mat-card-title-group>
-                    <mat-card-title><h3><b>File Name:</b> {{item.imageName}}</h3></mat-card-title>
-                    <img mat-card-sm-image [src]="getFileImage(item.imageName)" >
+                    <mat-card-title><h3><b>File Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b>
+                      {{item.imageName}}</h3></mat-card-title>
+                    <mat-card-title><h3><b>Primary Finding&nbsp;:</b> {{item.class1}}</h3></mat-card-title>
+                    <mat-card-title><h3><b>Finding Type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b> {{item.class1Type}}</h3></mat-card-title>
+                    <img mat-card-md-image [src]="getFileImage(item.imageName)" >
                   </mat-card-title-group>
-                  <mat-card-content style="margin-top: 20px;">
-                    <div class="prediction-rows">
-                      <div fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutAlign="start start" fxLayoutGap="1rem">
-                        <div fxFlex="70">
-                          {{item.class1}}
+                  <mat-card-content style="margin-top: 10px;">
+                    <label><h3><i><b>Findings Summary</b></i></h3></label>
+                    <div>
+                      <div class="prediction-rows">
+                        <div fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutAlign="start start" fxLayoutGap="1rem">
+                          <div fxFlex="70">
+                            {{item.class1}}
+                          </div>
+                          <div fxFlex="30" fxLayoutAlign="end end">
+                            {{item.prob1}}%
+                          </div>
                         </div>
-                        <div fxFlex="30" fxLayoutAlign="end end">
-                          {{item.prob1}}%
-                        </div>
+                        <mat-progress-bar class="progress-bar" mode="determinate" [value]="item.prob1">
+                        </mat-progress-bar>
                       </div>
-                      <mat-progress-bar class="progress-bar" mode="determinate" [value]="item.prob1">
-                      </mat-progress-bar>
-                    </div>
-                    <div class="prediction-rows">
-                      <div fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutAlign="start start" fxLayoutGap="1rem">
-                        <div fxFlex="70">
-                          {{item.class2}}
+                      <div class="prediction-rows">
+                        <div fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutAlign="start start" fxLayoutGap="1rem">
+                          <div fxFlex="70">
+                            {{item.class2}}
+                          </div>
+                          <div fxFlex="30" fxLayoutAlign="end end">
+                            {{item.prob2}}%
+                          </div>
                         </div>
-                        <div fxFlex="30" fxLayoutAlign="end end">
-                          {{item.prob2}}%
-                        </div>
+                        <mat-progress-bar class="progress-bar" mode="determinate" [value]="item.prob2">
+                        </mat-progress-bar>
                       </div>
-                      <mat-progress-bar class="progress-bar" mode="determinate" [value]="item.prob2">
-                      </mat-progress-bar>
-                    </div>
-                    <div class="prediction-rows">
-                      <div fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutAlign="start start" fxLayoutGap="1rem">
-                        <div fxFlex="70">
-                          {{item.class3}}
+                      <div class="prediction-rows">
+                        <div fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutAlign="start start" fxLayoutGap="1rem">
+                          <div fxFlex="70">
+                            {{item.class3}}
+                          </div>
+                          <div fxFlex="30" fxLayoutAlign="end end">
+                            {{item.prob3}}%
+                          </div>
                         </div>
-                        <div fxFlex="30" fxLayoutAlign="end end">
-                          {{item.prob3}}%
-                        </div>
+                        <mat-progress-bar class="progress-bar" mode="determinate" [value]="item.prob3">
+                        </mat-progress-bar>
                       </div>
-                      <mat-progress-bar class="progress-bar" mode="determinate" [value]="item.prob3">
-                      </mat-progress-bar>
                     </div>
+
                   </mat-card-content>
                 </mat-card>
               </div>

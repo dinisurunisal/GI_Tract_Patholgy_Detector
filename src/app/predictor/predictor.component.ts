@@ -5,12 +5,14 @@ import { Observable} from 'rxjs';
 import { FileUploadService } from '../services/file-upload.service';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import findingJson from '../../assets/json/findings-details.json';
 
 interface Predictions {
   imageName: String;
   class1: String;
   class2: String;
   class3: String;
+  class1Type: String;
   prob1: String;
   prob2: String;
   prob3: String;
@@ -123,7 +125,16 @@ export class PredictorComponent implements OnInit {
       this.uploadService.predict(this.selectedImages[i]).subscribe(
         response => {
           if (response instanceof HttpResponse) {
-            this.dataDisplay.push(response.body.prediction);
+            this.dataDisplay.push({
+              imageName: response.body.prediction.imageName,
+              class1: findingJson.category.find(x => x.code === response.body.prediction.class1)?.name || response.body.prediction.class1,
+              class2: response.body.prediction.class2,
+              class3: response.body.prediction.class3,
+              class1Type: findingJson.category.find(x => x.code === response.body.prediction.class1)?.type || "Cannot Be Detected",
+              prob1: response.body.prediction.prob1,
+              prob2: response.body.prediction.prob2,
+              prob3: response.body.prediction.prob3,
+            });
             console.log(response.body.prediction)
             this.showSpinner = false;
           }
