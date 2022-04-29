@@ -38,6 +38,7 @@ export class PredictorComponent implements OnInit {
   fileDetails: Observable<any>;
   dataDisplay = new Array<Predictions>();
   showSpinner = true;
+  currentDate = new Date();
 
   constructor(
     private http: HttpClient,
@@ -101,7 +102,7 @@ export class PredictorComponent implements OnInit {
   }
 
   onFirstStepDone() {
-    if (this.fileUploadList.length !== 0){
+    if (this.fileUploadList.length !== 0 && !this.enableUpload){
       this.stepper.next();
     }
   }
@@ -128,8 +129,8 @@ export class PredictorComponent implements OnInit {
             this.dataDisplay.push({
               imageName: response.body.prediction.imageName,
               class1: findingJson.category.find(x => x.code === response.body.prediction.class1)?.name || response.body.prediction.class1,
-              class2: response.body.prediction.class2,
-              class3: response.body.prediction.class3,
+              class2: findingJson.category.find(x => x.code === response.body.prediction.class2)?.name || response.body.prediction.class2,
+              class3: findingJson.category.find(x => x.code === response.body.prediction.class3)?.name || response.body.prediction.class3,
               class1Type: findingJson.category.find(x => x.code === response.body.prediction.class1)?.type || "Cannot Be Detected",
               prob1: response.body.prediction.prob1,
               prob2: response.body.prediction.prob2,

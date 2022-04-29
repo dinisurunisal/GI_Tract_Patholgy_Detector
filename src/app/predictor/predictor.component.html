@@ -91,14 +91,20 @@
               <mat-card-title>ENDOSCOPY REPORT</mat-card-title>
               <mat-card-subtitle>Predicted Pathologies/ Abnormalities</mat-card-subtitle>
             </mat-card-header>
+
+            <div style="float: right; margin-right: 2rem; margin-top: -20px; font-weight: 500;">
+              <label>Report Generated On: {{currentDate | date:'medium'}}</label>
+            </div>
+
             <mat-card-content>
 
               <div *ngFor="let item of dataDisplay; let i = index">
+
                 <mat-card class="grid-container">
                   <mat-card-title-group>
                     <mat-card-title><h3><b>File Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b>
                       {{item.imageName}}</h3></mat-card-title>
-                    <mat-card-title><h3><b>Primary Finding&nbsp;:</b> {{item.class1}}</h3></mat-card-title>
+                    <mat-card-title><h3><b>Primary Finding&nbsp;<span style="margin-left: 2px;">:</span></b> {{item.class1}}</h3></mat-card-title>
                     <mat-card-title><h3><b>Finding Type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b> {{item.class1Type}}</h3></mat-card-title>
                     <img mat-card-md-image [src]="getFileImage(item.imageName)" >
                   </mat-card-title-group>
@@ -151,7 +157,7 @@
           </mat-card>
         </div>
 
-        <button mat-fab color="accent" class="download-fab" (click)="openPDF()" matTooltip="Download PDF">
+        <button mat-fab color="accent" class="download-fab" (click)="openPDF()" *ngIf="!showSpinner" matTooltip="Download PDF">
           <mat-icon>vertical_align_bottom</mat-icon>
         </button>
 

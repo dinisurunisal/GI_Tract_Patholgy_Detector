@@ -4,7 +4,139 @@
       "code": "polyps",
       "name": "Polyps",
       "type": "Pathological Finding",
-      "description": "polyp, in medicine, any growth projecting from the wall of a cavity lined with a mucous membrane. A polyp may have a broad base, in which case it is called sessile; or it may be a pedunculated polyp, i.e., one with a long, narrow neck. The surface of a polyp may be smooth, irregular, or multilobular."
+      "description": "Polyp, in medicine, any growth projecting from the wall of a cavity lined with a mucous membrane. A polyp may have a broad base, in which case it is called sessile; or it may be a pedunculated polyp, i.e., one with a long, narrow neck. The surface of a polyp may be smooth, irregular, or multilobular."
+    },
+    {
+      "code": "esophagitis-a",
+      "name": "Esophagitis Grade-A",
+      "type": "Pathological Finding",
+      "description": "Esophagitis is inflammation that may damage tissues of the esophagus, the muscular tube that delivers food from your mouth to your stomach."
+    },
+    {
+      "code": "esophagitis-b-d",
+      "name": "Esophagitis (Grade-B - Grade-D)",
+      "type": "Pathological Finding",
+      "description": "Esophagitis is inflammation that may damage tissues of the esophagus, the muscular tube that delivers food from your mouth to your stomach."
+    },
+    {
+      "code": "barretts-short-segment",
+      "name": "Short Segment Barrett's Esophagus",
+      "type": "Pathological Finding",
+      "description": "Short segment Barrett esophagus is defined by the presence of columnar-appearing mucosa in the distal esophagus (<3 cm in length) with intestinal metaplasia on biopsy."
+    },
+    {
+      "code": "bbps-0-1",
+      "name": "Boston Bowel Preparation Scale (Grade-0 - Grade-1)",
+      "type": "Quality of Mucosal Views",
+      "description": "The BBPS is a standardized 9-point assessment scale for the colon. The structure of the colon is divided into its three segments: right colon, transverse colon, and left colon. Each segment is classified from 0 to 3 depending on the degree of soiling."
+    },
+    {
+      "code": "bbps-2-3",
+      "name": "Boston Bowel Preparation Scale (Grade-2 - Grade-3)",
+      "type": "Quality of Mucosal Views",
+      "description": "The BBPS is a standardized 9-point assessment scale for the colon. The structure of the colon is divided into its three segments: right colon, transverse colon, and left colon. Each segment is classified from 0 to 3 depending on the degree of soiling."
+    },
+    {
+      "code": "barretts",
+      "name": "Barrett's Esophagus",
+      "type": "Pathological Finding",
+      "description": "Barrett's esophagus is a complication of chronic (long-lasting) and usually severe gastrointestinal reflux disease (GERD) but occurs in only a small percentage of patients with GERD"
+    },
+    {
+      "code": "dyed-resection-margins",
+      "name": "Dyed-based Polypectomy Margin",
+      "type": "Therapeutic Interventions",
+      "description": "Dye-based chromoendoscopy is a diagnostic technique in which a chemical substance is sprayed or flushed onto the mucosal surface of the gastrointestinal tract to highlight specific areas. It is an established technique in demarcating and evaluating colorectal lesions and is increasingly employed in lesion detection"
+    },
+    {
+      "code": "dyed-lifted-polyps",
+      "name": "Dyed-based Lifted Polyp",
+      "type": "Therapeutic Interventions",
+      "description": "For nonpedunculated lesions with a diameter ⩾10 mm,7 endoscopic mucosal resection (EMR) is generally the preferred resection modality. EMR involves the injection of fluid into the submucosal space to separate a mucosal-based lesion from the muscularis propria, followed by snare resection of the lesion."
+    },
+    {
+      "code": "retroflex-rectum",
+      "name": "Rectal Retroflexion",
+      "type": "Anatomical Landmark",
+      "description": "Rectal retroflexion refers to a maneuver during colonoscopy in which the instrument tip is deflected in U-turn so that the imaging system is directed backward, allowing clear visualization of the distal rectum."
+    },
+    {
+      "code": "retroflex-stomach",
+      "name": "Stomach Retroflexion",
+      "type": "Anatomical Landmark",
+      "description": "Retroflexion is a term used to discuss how the camera was turned to look at generally the upper part of the stomach"
+    },
+    {
+      "code": "z-line",
+      "name": "Z line in the Esophagus",
+      "type": "Anatomical Landmark",
+      "description": "The Z line demarcates the squamocolumnar junction (SCJ), the transition from the squamous esophageal mucosa to the columnar mucosa lining the stomach, or in cases of Barrett's esophagus, between the squamous and intestinalized columnar epithelium of the metaplastic segment."
+    },
+    {
+      "code": "hemorrhoids",
+      "name": "Hemorrhoids",
+      "type": "Pathological Finding",
+      "description": "Hemorrhoids are swollen veins in your lower rectum. Internal hemorrhoids are usually painless, but tend to bleed. External hemorrhoids may cause pain."
+    },
+    {
+      "code": "pylorus",
+      "name": "Pylorus",
+      "type": "Anatomical Landmark",
+      "description": "The part of the stomach that connects to the duodenum (first part of the small intestine). The pylorus is a valve that opens and closes during digestion. This allows partly digested food and other stomach contents to pass from the stomach to the small intestine."
+    },
+    {
+      "code": "impacted-stool",
+      "name": "Fecal Impaction",
+      "type": "Quality of Mucosal Views",
+      "description": "A fecal impaction is a large, hard mass of stool that gets stuck so badly in your colon or rectum that you can't push it out. This problem can be very severe. It can cause grave illness or even death if it's not treated. It's more common among older adults who have bowel problems."
+    },
+    {
+      "code": "ileum",
+      "name": "Ileum",
+      "type": "Anatomical Landmark",
+      "description": "The last part of the small intestine. It connects to the cecum (first part of the large intestine). The ileum helps to further digest food coming from the stomach and other parts of the small intestine."
+    },
+    {
+      "code": "cecum",
+      "name": "Cecum",
+      "type": "Anatomical Landmark",
+      "description": "Cecum is pouch or large tubelike structure in the lower abdominal cavity that receives undigested food material from the small intestine and is considered the first region of the large intestine."
+    },
+    {
+      "code": "ulcerative-colitis-grade-0-1",
+      "name": "Ulcerative Colitis (Grade-0 - Grade-1)",
+      "type": "Pathological Finding",
+      "description": "Ulcerative colitis is an inflammatory bowel disease (IBD) that causes inflammation and ulcers (sores) in your digestive tract. Ulcerative colitis affects the innermost lining of your large intestine (colon) and rectum."
+    },
+    {
+      "code": "ulcerative-colitis-grade-1",
+      "name": "Ulcerative Colitis Grade-1",
+      "type": "Pathological Finding",
+      "description": "Ulcerative colitis is an inflammatory bowel disease (IBD) that causes inflammation and ulcers (sores) in your digestive tract. Ulcerative colitis affects the innermost lining of your large intestine (colon) and rectum."
+    },
+    {
+      "code": "ulcerative-colitis-grade-1-2",
+      "name": "Ulcerative Colitis (Grade-1 - Grade-2)",
+      "type": "Pathological Finding",
+      "description": "Ulcerative colitis is an inflammatory bowel disease (IBD) that causes inflammation and ulcers (sores) in your digestive tract. Ulcerative colitis affects the innermost lining of your large intestine (colon) and rectum."
+    },
+    {
+      "code": "ulcerative-colitis-grade-2",
+      "name": "Ulcerative Colitis Grade-2",
+      "type": "Pathological Finding",
+      "description": "Ulcerative colitis is an inflammatory bowel disease (IBD) that causes inflammation and ulcers (sores) in your digestive tract. Ulcerative colitis affects the innermost lining of your large intestine (colon) and rectum."
+    },
+    {
+      "code": "ulcerative-colitis-grade-2-3",
+      "name": "Ulcerative Colitis (Grade-2 - Grade-3)",
+      "type": "Pathological Finding",
+      "description": "Ulcerative colitis is an inflammatory bowel disease (IBD) that causes inflammation and ulcers (sores) in your digestive tract. Ulcerative colitis affects the innermost lining of your large intestine (colon) and rectum."
+    },
+    {
+      "code": "ulcerative-colitis-grade-3",
+      "name": "Ulcerative Colitis Grade-3",
+      "type": "Pathological Finding",
+      "description": "Ulcerative colitis is an inflammatory bowel disease (IBD) that causes inflammation and ulcers (sores) in your digestive tract. Ulcerative colitis affects the innermost lining of your large intestine (colon) and rectum."
     }
   ]
 }
