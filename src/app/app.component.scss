@@ -1,0 +1,23 @@
+mat-toolbar {
+  // background-color:rgb(53, 34, 15);
+  --background: transparent;
+  background-image: linear-gradient(180deg, rgb(25, 29, 112) 0%, rgb(21, 20, 64) 50%, rgb(15, 12, 45) 100%);
+  color: white;
+  z-index: 2;
+  position: relative;
+  height: 7rem;
+  padding-top: 1rem;
+}
+
+mat-sidenav {
+  width: 200px;
+  color: black;
+}
+
+mat-nav-list a{
+  color: rgb(255, 255, 255);
+}
+
+mat-nav-list mat-icon{
+  padding-right: 10px;
+}

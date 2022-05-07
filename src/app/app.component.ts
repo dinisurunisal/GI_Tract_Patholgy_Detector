@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'gi-tract-pathology-detection';
+
+  events: string[] = [];
+  opened: boolean;
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
 }

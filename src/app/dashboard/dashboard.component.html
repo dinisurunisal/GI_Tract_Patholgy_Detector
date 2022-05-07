@@ -1,0 +1,41 @@
+<section class="page-wrapper">
+
+  <div fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutAlign="start start" fxLayoutGap="1rem" style="width: 100%;">
+
+    <div style="width: 100%;" fxFlex="50">
+      <mat-card>
+        <mat-card-header>
+          <h3>Model Performance</h3>
+        </mat-card-header>
+        <mat-card-content>
+          <div fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutAlign="start start" fxLayoutGap="1rem" style="width: 100%;">
+            <div style="width: 100%;" fxFlex="50" fxLayoutAlign="center">
+              <mwl-gauge [max]="100" [dialStartAngle]="0" [dialEndAngle]="180" [value]="84" [animated]="true"
+              [animationDuration]="50">
+              </mwl-gauge>
+            </div>
+
+            <div style="width: 100%;" fxFlex="50" fxLayoutAlign="center">
+              <mwl-gauge [max]="100" [dialStartAngle]="0" [dialEndAngle]="180" [value]="84" [animated]="true"
+              [animationDuration]="50">
+              </mwl-gauge>
+            </div>
+          </div>
+        </mat-card-content>
+
+      </mat-card>
+    </div>
+
+    <div style="width: 100%;" fxFlex="50">
+      <mat-card>
+        <mwl-gauge [max]="100" [dialStartAngle]="0" [dialEndAngle]="180" [value]="84" [animated]="true" [animationDuration]="50">
+        </mwl-gauge>
+
+        <mwl-gauge [max]="100" [dialStartAngle]="0" [dialEndAngle]="180" [value]="84" [animated]="true" [animationDuration]="50">
+        </mwl-gauge>
+      </mat-card>
+    </div>
+
+  </div>
+
+</section>
