@@ -1,8 +1,8 @@
-import { PredictorComponent } from './predictor/predictor.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AboutusComponent } from './aboutus/aboutus.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { PredictorComponent } from './predictor/predictor.component';
+import { HelpComponent } from './help/help.component';
 
 
 const routes: Routes = [
@@ -19,8 +19,8 @@ const routes: Routes = [
     component: PredictorComponent
   },
   {
-    path: 'aboutus',
-    component: AboutusComponent
+    path: 'help',
+    component: HelpComponent
   },
 ];
 

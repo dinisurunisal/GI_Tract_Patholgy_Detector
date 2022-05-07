@@ -22,13 +22,16 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { HelpComponent } from './help/help.component';
+import { GaugeModule } from 'angular-gauge';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     AboutusComponent,
-    PredictorComponent
+    PredictorComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatGridListModule,
     MatChipsModule,
     MatTooltipModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    GaugeModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
