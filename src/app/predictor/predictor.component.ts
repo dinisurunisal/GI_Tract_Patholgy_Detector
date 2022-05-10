@@ -6,6 +6,7 @@ import { FileUploadService } from '../services/file-upload.service';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import findingJson from '../../assets/json/findings-details.json';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface Predictions {
   imageName: String;
@@ -33,8 +34,9 @@ export class PredictorComponent implements OnInit {
   selectedImages: FileList;
   enableUpload = false;
   uploadedImages = Array<any>();
-  uploadProgress = [];
-  fileUploadList = [];
+  uploadProgress = Array<any>();
+  fileUploadList = Array<any>();
+  errorList = Array<any>();
   fileDetails: Observable<any>;
   dataDisplay = new Array<Predictions>();
   showSpinner = true;
@@ -42,7 +44,8 @@ export class PredictorComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private uploadService: FileUploadService
+    private uploadService: FileUploadService,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -52,9 +55,16 @@ export class PredictorComponent implements OnInit {
     this.uploadProgress = [];
     this.uploadedImages = [];
     this.fileUploadList = [];
+    this.errorList = [];
     this.dataDisplay = [];
     this.selectedImages = null;
-    this.selectedImages = event.target.files;
+
+    if (event.target.files.length <= 50) {
+      this.selectedImages = event.target.files;
+    } else {
+      this._snackBar.open('Unable to upload more than 50 images!', 'Close');
+    }
+
     this.enableUpload = true;
   }
 
@@ -76,13 +86,16 @@ export class PredictorComponent implements OnInit {
         this.uploadedImages.push(dataToBeSubmitted)
       }
 
-      this.enableUpload = false;
+      if (this.fileUploadList.find(x => x.validity === false)) {
+        this.enableUpload = false;
+        this._snackBar.open('All Images Uploaded Successfully!', 'Close');
+      }
     }
   }
 
   upload(idx, file) {
     this.uploadProgress[idx] = { value: 0, fileName: file.name };
-    this.fileUploadList[idx] = { fileName: file.name, message: '', validity: false };
+    this.fileUploadList[idx] = { fileName: file.name, message: '', validity: Boolean };
 
     console.log ('Name: ' + file.name + "\n" +
     'Type: ' + file.type + "\n" +
@@ -96,7 +109,15 @@ export class PredictorComponent implements OnInit {
           this.fileUploadList[idx].message = response.body.message;
           this.fileUploadList[idx].validity = response.body.valid;
           // this.fileDetails = this.uploadService.getUploadedFiles();
+          if (this.fileUploadList[idx].validity === false) {
+            this._snackBar.open('Invalid Image Added. Please Re-Upload!', 'Close');
+          }
         }
+      },
+      error => {
+        this.errorList.push(error)
+        this._snackBar.open('Server Error!', 'Close');
+        console.log(error);
       }
     );
   }
@@ -104,6 +125,10 @@ export class PredictorComponent implements OnInit {
   onFirstStepDone() {
     if (this.fileUploadList.length !== 0 && !this.enableUpload){
       this.stepper.next();
+    } else if (this.fileUploadList.length === 0) {
+      this._snackBar.open('Please upload an image!', 'Close');
+    } else if (this.enableUpload) {
+      this._snackBar.open('Please upload valid images!', 'Close');
     }
   }
 

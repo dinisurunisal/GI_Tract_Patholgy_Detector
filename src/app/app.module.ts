@@ -24,6 +24,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { HelpComponent } from './help/help.component';
 import { GaugeModule } from 'angular-gauge';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { GaugeModule } from 'angular-gauge';
     MatChipsModule,
     MatTooltipModule,
     FlexLayoutModule,
+    MatSnackBarModule,
     GaugeModule.forRoot()
   ],
   providers: [],

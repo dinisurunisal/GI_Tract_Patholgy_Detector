@@ -8,7 +8,7 @@ import { HelpComponent } from './help/help.component';
 const routes: Routes = [
   {
     path: '',
-    component: DashboardComponent
+    component: PredictorComponent
   },
   {
     path: 'dashboard',
