@@ -1,11 +1,21 @@
 <section class="page-wrapper">
 
     <mat-card >
-      <div style="display:flex; align-items:center; justify-content:center; margin-bottom: 1rem;">
+      <div style="display:flex; align-items:center; justify-content:center;">
         <h2>
           Instructions To Proceed
         </h2>
       </div>
+
+      <mat-card style="margin-bottom: 1rem;">
+        <ul class="inst-panel">
+          <li><span>This platform is created only to detect abnormalities and pathologies of gastrointenstinal endosopic images.
+                    Any other image uploaded will give false or no results.</span>
+          </li>
+          <li><span>The platform is capable of uploading multiple images upto 50 images.</span></li>
+          <li><span>To obtain a prediction report, navigate to the prediction wizard using the "Predictor" button in side navigation menu.</span></li>
+        </ul>
+      </mat-card>
 
       <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="flex-start" fxLayoutGap="1rem" style="width: 100%;">
 
@@ -16,8 +26,12 @@
           </mat-card-header>
 
           <mat-card-content >
-            <img mat-card-image src="assets/select.png">
+            <img mat-card-image src="assets/select1.png">
           </mat-card-content>
+
+          <div class="image-bottom-text" style="left: 25%;">
+            <span class="text-span">Upload endoscopic image(s)</span>
+          </div>
         </mat-card>
 
         <mat-card class="preview-mat-card" fxFlex="0 1 calc(33.3% - 0.5rem)" fxFlex.lt-md="0 1 calc(50% - 32px)"
@@ -30,6 +44,9 @@
           <mat-card-content >
             <img mat-card-image src="assets/preview1.png" >
           </mat-card-content>
+          <div class="image-bottom-text" style="left: 30%;">
+            <span class="text-span">Preview the image(s)</span>
+          </div>
         </mat-card>
 
         <mat-card class="preview-mat-card" fxFlex="0 1 calc(33.3% - 0.5rem)" fxFlex.lt-md="0 1 calc(50% - 32px)"
@@ -42,6 +59,9 @@
           <mat-card-content >
             <img mat-card-image src="assets/predict.png" >
           </mat-card-content>
+          <div class="image-bottom-text" style="left: 15%;">
+            <span class="text-span">Obtain a report of the predicted image(s)</span>
+          </div>
         </mat-card>
 
       </div>
