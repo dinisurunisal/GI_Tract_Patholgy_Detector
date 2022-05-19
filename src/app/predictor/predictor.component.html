@@ -35,7 +35,7 @@
         </div>
 
         <div>
-          <button mat-flat-button color="primary" (click)="onFirstStepDone()">Preview</button>
+          <button mat-flat-button color="primary" class="path-button" (click)="onFirstStepDone()">Preview<mat-icon>navigate_next</mat-icon></button>
         </div>
       </div>
 
@@ -68,8 +68,12 @@
         </div>
 
         <div style="margin-top: 20px;">
-          <button mat-flat-button color="primary" matStepperPrevious style="margin-right: 20px;">Back</button>
-          <button mat-flat-button color="warn" matStepperNext (click)="onPredictClick()">Examine</button>
+          <button mat-flat-button color="primary" class="path-button" matStepperPrevious style="margin-right: 20px;">
+            <mat-icon style="margin-left: -5px;">navigate_before</mat-icon>Back
+          </button>
+          <button mat-flat-button color="warn" class="path-button" matStepperNext (click)="onPredictClick()">Examine
+            <mat-icon  style="margin-left: -1px;">search</mat-icon>
+          </button>
         </div>
 
       </div>
@@ -88,6 +92,13 @@
               <mat-card-title>ENDOSCOPY REPORT</mat-card-title>
               <mat-card-subtitle>Predicted Pathologies/ Abnormalities</mat-card-subtitle>
             </mat-card-header>
+
+            <button mat-icon-button class="finding-button" *ngIf="!showDetails" matTooltip="Show More Details">
+              <mat-icon (click)="showDescrib(true)">help</mat-icon>
+            </button>
+            <button mat-icon-button class="finding-button" *ngIf="showDetails" matTooltip="Show More Details">
+              <mat-icon (click)="showDescrib(false)">help</mat-icon>
+            </button>
 
             <div style="float: right; margin-right: 2rem; margin-top: -20px; font-weight: 500;">
               <label>Report Generated On: {{currentDate | date:'medium'}}</label>
@@ -146,6 +157,13 @@
                       </div>
                     </div>
 
+                    <div *ngIf="showDetails" style="margin-top: 1rem;">
+                      <div class="description-div">
+                        <h3><b>More Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b></h3>
+                         <span style="top: -15px; position: relative;">{{item.details}}</span>
+                      </div>
+                    </div>
+
                   </mat-card-content>
                 </mat-card>
               </div>
@@ -159,8 +177,12 @@
         </button>
 
         <div style="margin-top: 20px;">
-          <button mat-flat-button color="primary" matStepperPrevious style="margin-right: 20px;">Back</button>
-          <button mat-flat-button color="primary" (click)="onResetClick()">Reset</button>
+          <button mat-flat-button color="primary" class="path-button" matStepperPrevious style="margin-right: 20px;">
+            <mat-icon style="margin-left: -5px;">navigate_before</mat-icon>Back
+          </button>
+          <button mat-flat-button color="primary" class="path-button" (click)="onResetClick()">Reset
+            <mat-icon style="margin-left: 1px;">settings_backup_restore</mat-icon>
+          </button>
         </div>
       </div>
 

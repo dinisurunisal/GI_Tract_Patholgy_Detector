@@ -17,6 +17,8 @@ interface Predictions {
   prob1: String;
   prob2: String;
   prob3: String;
+  details: String;
+  showDetails: Boolean;
 }
 
 @Component({
@@ -41,6 +43,7 @@ export class PredictorComponent implements OnInit {
   dataDisplay = new Array<Predictions>();
   showSpinner = true;
   currentDate = new Date();
+  showDetails = false;
 
   constructor(
     private http: HttpClient,
@@ -86,10 +89,10 @@ export class PredictorComponent implements OnInit {
         this.uploadedImages.push(dataToBeSubmitted)
       }
 
-      if (this.fileUploadList.find(x => x.validity === false)) {
+      // if (this.fileUploadList.find(x => x.validity === false)) {
         this.enableUpload = false;
-        this._snackBar.open('All Images Uploaded Successfully!', 'Close');
-      }
+      //   this._snackBar.open('All Images Uploaded Successfully!', 'Close');
+      // }
     }
   }
 
@@ -160,6 +163,8 @@ export class PredictorComponent implements OnInit {
               prob1: response.body.prediction.prob1,
               prob2: response.body.prediction.prob2,
               prob3: response.body.prediction.prob3,
+              details: findingJson.category.find(x => x.code === response.body.prediction.class1)?.description || "Cannot Be Detected",
+              showDetails: false
             });
             console.log(response.body.prediction)
             this.showSpinner = false;
@@ -201,6 +206,10 @@ export class PredictorComponent implements OnInit {
 			}
       PDF.save('Gastro-Report.pdf');
     });
+  }
+
+  public showDescrib(bool) {
+    this.showDetails = bool
   }
 
 }
